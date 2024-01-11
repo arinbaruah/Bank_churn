@@ -1,0 +1,34 @@
+---
+title: "Bank account churn classification"
+author: "Arindam Baruah"
+format: html
+editor: visual
+---
+
+🏦 💸
+
+![Source: Medium](figure/fig1.png)
+
+# What is a bank churn and why does it occur ?
+
+With the advent of digital banking, it has become extremely convenient for users to open a new bank account. As opposed to the age old tradition of submitting multiple documents and credit histories after visiting a bank, the process has been revamped by a great deal with an user needing less than 10 minutes to open an account in the comfort of their couches.
+
+However, with digital banking, it has also become convenient for users to close a bank account, more commonly termed as a **"churn"**. While this may appear to be a win for consumers, it is however important to understand the reasons and the effects that entail from a bank churn.
+
+::: {.callout-note}
+# Reasons for a churn to occur
+A bank account churn could occur for a multitiude of reasons which are important for banks to analyse to reduce attrition of customers and also remain competitive in the market. Some of the reasons are:
+
+-   **Fees and Charges:** High fees or unexpected charges can prompt customers to switch banks. This may include monthly maintenance fees, ATM fees, overdraft fees, and other charges.
+-   **Low Interest Rates:** If a bank offers low interest rates on savings accounts or certificates of deposit, customers might look for better opportunities elsewhere to maximize their returns.
+-   **Poor Customer Service:** Inadequate customer service, long wait times, and unhelpful staff can lead to frustration and dissatisfaction, prompting customers to seek better service elsewhere.
+-   **Branch Accessibility:** Limited access to physical branches or ATMs can be a significant factor. If a customer moves to an area where their current bank has limited presence, they might switch to a more accessible option.
+-   **Technology and Online Services:** Customers may switch to a bank that provides better online and mobile banking services, as technology plays an increasingly crucial role in the banking experience.
+-   **Incentives and Promotions:** Banks often attract new customers by offering promotions, bonuses, or better interest rates. Existing customers may churn to take advantage of these offers.
+-   **Changes in Financial Needs:** As individuals' financial situations evolve, their banking needs may change. For example, a customer might require more advanced financial products, and if their current bank can't meet those needs, they may switch to a different institution.
+-   **Mergers and Acquisitions:** Changes resulting from bank mergers or acquisitions, such as alterations in account terms, fees, or service quality, can drive customers to seek alternatives.
+-   **Ethical or Social Reasons:** Some customers may choose to switch banks due to concerns about a bank's ethical practices, social responsibility, or involvement in controversial activities.
+-   **Security Concerns:** If a bank experiences a security breach or if customers perceive their accounts to be at risk, they may opt to move their funds to a more secure institution.
+-   **Better Financial Products:** Customers may switch banks to access better financial products, such as higher-interest savings accounts, more competitive loan rates, or improved credit card offerings.
+-   **Life Events:** Major life events like marriage, divorce, retirement, or the death of a spouse can prompt individuals to reassess their banking relationships and switch to better-suited options.
+:::
