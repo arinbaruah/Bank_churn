@@ -3,6 +3,11 @@ title: "Bank account churn classification"
 author: "Arindam Baruah"
 format: html
 editor: visual
+number-sections: true
+execute: 
+  echo: false
+  warning: false
+  message: false
 ---
 
 🏦 💸
@@ -32,3 +37,47 @@ A bank account churn could occur for a multitiude of reasons which are important
 -   **Better Financial Products:** Customers may switch banks to access better financial products, such as higher-interest savings accounts, more competitive loan rates, or improved credit card offerings.
 -   **Life Events:** Major life events like marriage, divorce, retirement, or the death of a spouse can prompt individuals to reassess their banking relationships and switch to better-suited options.
 :::
+
+# Importing the relevant libraries and dataset
+
+In order to initiate our analysis of the bank account data, we will read all the required libraries and then take a glimpse of how our data looks like.
+
+```{r libraries, echo=TRUE}
+library(tidyverse)
+library(naniar)
+library(bookdown)
+library(stringr)
+library(stringi)
+library(lubridate)
+library(DT)
+library(forcats)
+library(ggthemes)
+library(corrplot)
+library(mltools)
+library(data.table)
+library(visdat)
+library(janitor)
+library(cowplot)
+library(caTools)
+library(pscl)
+library(ROCR)
+library(caret)
+library(xgboost)
+library(randomForest)
+library(lightgbm)
+library(Matrix)
+library(catboost)
+library(kableExtra)
+```
+
+```{r}
+#| label: tbl-data
+#| tbl-cap: "Dataset"
+df_bank <- read_csv("data/train.csv")
+
+kbl(head(df_bank)) %>% kable_paper(font_size = 9) %>%
+  column_spec(14, bold = T, border_right = T) %>%
+  column_spec(2, width = "30em", background = "yellow")
+
+```
+
