@@ -42,7 +42,7 @@ A bank account churn could occur for a multitiude of reasons which are important
 
 # Importing the relevant libraries and dataset 
 ::: panel-tabset
-## Library
+## Packages used
 
 In order to initiate our analysis of the bank account data, we will read all the required libraries and then take a glimpse of how our data looks like.
 
@@ -76,7 +76,7 @@ library(catboost)
 library(kableExtra)
 ```
 
-## Data
+## Dataset glimpse
 
 ```{r}
 #| label: tbl-data
@@ -92,6 +92,8 @@ kbl(head(df_bank)) %>% kable_paper(font_size = 9) %>%
 
 # Data description
 
+Based on a brief research, the description for each variable in the dataset is as follows:
+
 1. __CustomerId:__ Unique identifier for each customer
 2. __Surname:__ Name associated with the customer
 3. __CreditScore:__ Credit score of the customer
@@ -106,3 +108,35 @@ kbl(head(df_bank)) %>% kable_paper(font_size = 9) %>%
 12. __EstimatedSalary:__ Estimated earning declared as salary for the customer
 13. __Exited:__ Has the customer closed the bank account
 
+# Data cleaning
+
+```{r}
+#| label: fig-misvis
+#| fig-cap: "Check for missing values in the dataset"
+gg_miss_var(df_bank)
+```
+As we can observe from @fig-misvis, the dataset is clean and __does not have any missing values.__ While this is ideal, it is however not the only check that we must perform in the data.
+
+# Data sanity checks
+::: panel-tabset
+
+## CustomerId
+
+Since the customer ID is a unique identification reference number for
+```{r}
+#| label: tbl-occur
+#| tbl-cap: "Number of occurrences of each customer"
+df_bank %>% group_by(CustomerId) %>% summarise(Total_occurrences = n()) %>% arrange(-Total_occurrences) %>% head() %>% kbl()
+```
+Based on @tbl-occur, we can observe that the same customer ID appears multiple number of times in the dataset when infact, it was supposed to appear just once. Hence, we can consider the CustomerId variable to be serving no purpose in the current dataset. This shall be dropped in the feature selection section.
+
+
+## Estimated Salary
+
+The estimated salary variable indicates the income of each customer declared as a salary. Salaries can never be 0 or negative. Let us quickly check if that indeed is the case.
+
+```{r}
+fivenum(df_bank$EstimatedSalary)
+```
+Based on the five number summary of the estimated salary data, the salaries are __indeed positive which is what is expected.__
+:::
