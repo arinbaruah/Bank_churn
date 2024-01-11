@@ -1,9 +1,9 @@
 ---
 title: "Bank account churn classification"
 author: "Arindam Baruah"
-format: html
-editor: visual
 number-sections: true
+toc: true
+output: html_document
 execute: 
   echo: false
   warning: false
@@ -14,7 +14,7 @@ execute:
 
 ![Source: Medium](figure/fig1.png)
 
-# What is a bank churn and why does it occur ?
+# What is a bank churn and why does it occur ? 
 
 With the advent of digital banking, it has become extremely convenient for users to open a new bank account. As opposed to the age old tradition of submitting multiple documents and credit histories after visiting a bank, the process has been revamped by a great deal with an user needing less than 10 minutes to open an account in the comfort of their couches.
 
@@ -38,11 +38,17 @@ A bank account churn could occur for a multitiude of reasons which are important
 -   **Life Events:** Major life events like marriage, divorce, retirement, or the death of a spouse can prompt individuals to reassess their banking relationships and switch to better-suited options.
 :::
 
-# Importing the relevant libraries and dataset
+
+
+# Importing the relevant libraries and dataset 
+::: panel-tabset
+## Library
 
 In order to initiate our analysis of the bank account data, we will read all the required libraries and then take a glimpse of how our data looks like.
 
-```{r libraries, echo=TRUE}
+```{r libraries, echo=TRUE,message=FALSE,warning=FALSE}
+#| label: library
+
 library(tidyverse)
 library(naniar)
 library(bookdown)
@@ -70,9 +76,11 @@ library(catboost)
 library(kableExtra)
 ```
 
+## Data
+
 ```{r}
 #| label: tbl-data
-#| tbl-cap: "Dataset"
+#| tbl-cap: "Bank churn dataset"
 df_bank <- read_csv("data/train.csv")
 
 kbl(head(df_bank)) %>% kable_paper(font_size = 9) %>%
@@ -80,4 +88,21 @@ kbl(head(df_bank)) %>% kable_paper(font_size = 9) %>%
   column_spec(2, width = "30em", background = "yellow")
 
 ```
+:::
+
+# Data description
+
+1. __CustomerId:__ Unique identifier for each customer
+2. __Surname:__ Name associated with the customer
+3. __CreditScore:__ Credit score of the customer
+4. __Geography:__ Location of the bank account based on geographical location of the bank
+5. __Gender:__ Gender of the customer
+6. __Age:__ Current age of the customer
+7. __Tenure:__ Length of time since the opening of the bank account
+8. __Balance:__ Current credit balance in the account
+9. __NumOfProducts:__ Number of banking services used by the customer
+10. __HasCrCard:__ An indicator for whether the customer has a credit card
+11. __IsActiveMember:__ Is the customer a regular user of the bank account through transactions
+12. __EstimatedSalary:__ Estimated earning declared as salary for the customer
+13. __Exited:__ Has the customer closed the bank account
 

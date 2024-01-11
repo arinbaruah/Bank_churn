@@ -75,10 +75,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-a-bank-churn-and-why-does-it-occur" id="toc-what-is-a-bank-churn-and-why-does-it-occur" class="nav-link active" data-scroll-target="#what-is-a-bank-churn-and-why-does-it-occur"><span class="header-section-number">1</span> What is a bank churn and why does it occur ?</a></li>
+  <li><a href="#importing-the-relevant-libraries-and-dataset" id="toc-importing-the-relevant-libraries-and-dataset" class="nav-link" data-scroll-target="#importing-the-relevant-libraries-and-dataset"><span class="header-section-number">2</span> Importing the relevant libraries and dataset</a></li>
+  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">3</span> Data description</a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -145,6 +155,10 @@ Reasons for a churn to occur
 </section>
 <section id="importing-the-relevant-libraries-and-dataset" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Importing the relevant libraries and dataset</h1>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Library</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Data</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>In order to initiate our analysis of the bank account data, we will read all the required libraries and then take a glimpse of how our data looks like.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -173,11 +187,13 @@ Reasons for a churn to occur
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(catboost)</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-data" class="anchored">
 <table class="lightable-paper table table-sm table-striped small" data-quarto-postprocess="true">
-<caption>Table&nbsp;1: Dataset</caption>
+<caption>Table&nbsp;1: Bank churn dataset</caption>
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">id</th>
@@ -300,6 +316,27 @@ Reasons for a churn to occur
 
 </div>
 </div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-description" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Data description</h1>
+<ol type="1">
+<li><strong>CustomerId:</strong> Unique identifier for each customer</li>
+<li><strong>Surname:</strong> Name associated with the customer</li>
+<li><strong>CreditScore:</strong> Credit score of the customer</li>
+<li><strong>Geography:</strong> Location of the bank account based on geographical location of the bank</li>
+<li><strong>Gender:</strong> Gender of the customer</li>
+<li><strong>Age:</strong> Current age of the customer</li>
+<li><strong>Tenure:</strong> Length of time since the opening of the bank account</li>
+<li><strong>Balance:</strong> Current credit balance in the account</li>
+<li><strong>NumOfProducts:</strong> Number of banking services used by the customer</li>
+<li><strong>HasCrCard:</strong> An indicator for whether the customer has a credit card</li>
+<li><strong>IsActiveMember:</strong> Is the customer a regular user of the bank account through transactions</li>
+<li><strong>EstimatedSalary:</strong> Estimated earning declared as salary for the customer</li>
+<li><strong>Exited:</strong> Has the customer closed the bank account</li>
+</ol>
 </section>
 
 </main>
