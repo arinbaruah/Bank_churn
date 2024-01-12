@@ -74,6 +74,8 @@ library(lightgbm)
 library(Matrix)
 library(catboost)
 library(kableExtra)
+library(plotly)
+library(ggExtra)
 ```
 
 ## Dataset glimpse
@@ -133,10 +135,35 @@ Based on @tbl-occur, we can observe that the same customer ID appears multiple n
 
 ## Estimated Salary
 
-The estimated salary variable indicates the income of each customer declared as a salary. Salaries can never be 0 or negative. Let us quickly check if that indeed is the case.
+The estimated salary variable indicates the income of each customer declared as a salary. __Salaries can never be negative.__ Let us quickly check if that indeed is the case.
 
 ```{r}
-fivenum(df_bank$EstimatedSalary)
+#| label: fig-salary
+#| fig-cap: "Salary distribution of customers"
+pl1 <- ggplot(data = df_bank,aes(x = EstimatedSalary)) + geom_histogram(alpha = 0.6,color = "orange") + theme_economist() + 
+  labs(x = "Estimated annual salary ($)", y = "Number of customers",
+       caption = "Visual by Arindam Baruah",title = "Annual salary distribution") + theme(plot.title = element_text(hjust = 0.5),
+                                                                                          panel.background = element_rect(fill = "cornsilk")) 
+pl1
 ```
-Based on the five number summary of the estimated salary data, the salaries are __indeed positive which is what is expected.__
+Based on the histrogram of the salaries as illustrated by @fig-salary, we can observe that the salaries are __indeed positive which is what is expected.__
+
+## Age
+
+Bank account customers are generally required to be adults (> 18 years). We will check if that holds true for the current dataset and attempt to detect any anomalous data such as negative age.
+
+```{r}
+#| label: fig-age
+#| fig-cap: "Age distribution of the bank customers"
+pl2 <- ggplot(data = df_bank,aes(y = Age)) + geom_boxplot() + theme_economist() + 
+  labs(y = "Age of customers (in years)",
+       caption = "Visual by Arindam Baruah",title = "Age distribution") + theme(plot.title = element_text(hjust = 0.5),
+                                                                                          panel.background = element_rect(fill = "cornsilk"),
+                                                                                axis.text.x = element_blank(),axis.ticks.x = element_blank()) 
+pl2
+```
+Based on @fig-age, we can observe that the data indeed suggests that the customers are of the right age (>18 years) and there are no anomalous data entries for this variable.
+
+
 :::
+

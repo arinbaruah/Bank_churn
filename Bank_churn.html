@@ -187,7 +187,9 @@ Reasons for a churn to occur
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lightgbm)</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Matrix)</span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(catboost)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
@@ -358,7 +360,7 @@ Reasons for a churn to occur
 <section id="data-sanity-checks" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Data sanity checks</h1>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">CustomerId</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Estimated Salary</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">CustomerId</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Estimated Salary</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">Age</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>Since the customer ID is a unique identification reference number for</p>
@@ -408,13 +410,32 @@ Reasons for a churn to occur
 <p>Based on <a href="#tbl-occur">Table&nbsp;2</a>, we can observe that the same customer ID appears multiple number of times in the dataset when infact, it was supposed to appear just once. Hence, we can consider the CustomerId variable to be serving no purpose in the current dataset. This shall be dropped in the feature selection section.</p>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<p>The estimated salary variable indicates the income of each customer declared as a salary. Salaries can never be 0 or negative. Let us quickly check if that indeed is the case.</p>
+<p>The estimated salary variable indicates the income of each customer declared as a salary. <strong>Salaries can never be negative.</strong> Let us quickly check if that indeed is the case.</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]     11.58  74637.57 117948.00 155155.25 199992.48</code></pre>
+<div class="cell-output-display">
+<div id="fig-salary" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Bank_churn_files/figure-html/fig-salary-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Salary distribution of customers</figcaption>
+</figure>
 </div>
 </div>
-<p>Based on the five number summary of the estimated salary data, the salaries are <strong>indeed positive which is what is expected.</strong></p>
+</div>
+<p>Based on the histrogram of the salaries as illustrated by <a href="#fig-salary">Figure&nbsp;2</a>, we can observe that the salaries are <strong>indeed positive which is what is expected.</strong></p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>Bank account customers are generally required to be adults (&gt; 18 years). We will check if that holds true for the current dataset and attempt to detect any anomalous data such as negative age.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-age" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Bank_churn_files/figure-html/fig-age-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Age distribution of the bank customers</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Based on <a href="#fig-age">Figure&nbsp;3</a>, we can observe that the data indeed suggests that the customers are of the right age (&gt;18 years) and there are no anomalous data entries for this variable.</p>
 </div>
 </div>
 </div>
