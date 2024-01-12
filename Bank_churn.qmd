@@ -167,3 +167,45 @@ Based on @fig-age, we can observe that the data indeed suggests that the custome
 
 :::
 
+# Exploratory Data Analysis
+
+Before we create a prediction model, we need to understand how are our variables correlated to one another. This will be done through various visualisations as follows:
+
+
+## Geography wise churn
+
+Let us try to understand if there are any geographical regions which have accounted for high churns.
+
+```{r}
+#| label: fig-geo
+#| fig-cap: "Bank accounts for each geographical location"
+df_geo <- df_bank %>% group_by(Geography,Exited) %>% summarise(Total_churns = n())
+
+df_geo$Exited <- as.factor(df_geo$Exited)
+
+df_geo$Exited <- case_match(df_geo$Exited,"0"~"Active","1"~"Churn")
+
+df_geo <- df_geo %>%
+  mutate(Percentage = Total_churns / sum(Total_churns) * 100)
+
+
+pl2 <- ggplot(data = df_geo,aes(x = Geography,y = Total_churns,
+                                fill = Exited)) + geom_col(position = "fill",color="black") + theme_classic() + labs(fill = "Bank account status",
+                                                                                                                     caption = "Visual by Arindam Baruah",
+                                                                                                                     title = "Bank account churn based on geographical location",x = "Geographical location",y = "Proportion of bank accounts") + theme(plot.title = element_text(hjust = 0.5)) +
+geom_text(
+    aes(label = paste0(round(Percentage,1),"%")),
+    position = position_fill(vjust = 0.5),  # Adjust the position as needed
+    color = "black"
+  )
+
+pl2
+```
+
+Based on the illustration @fig-geo, we can observe that the percentage of churns are significantly higher in Germany as compared to France and Spain where the churn percentage appears to be similar.
+
+:::{.callout-note}
+# Key takeaway
+
+The higher churn % for Germany could indicate issues pertaining to the economy of the country or factors such as loan interest rate in the country. It could also indicate that the banking services or customer services in Germany might be lacking as compared to the other countries which have resulted in the higher churn percentage. Diving deeper into the banking practices of Germany would provide a better understanding as to the reason for the high attrition of customers.
+:::

@@ -88,6 +88,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">3</span> Data description</a></li>
   <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning"><span class="header-section-number">4</span> Data cleaning</a></li>
   <li><a href="#data-sanity-checks" id="toc-data-sanity-checks" class="nav-link" data-scroll-target="#data-sanity-checks"><span class="header-section-number">5</span> Data sanity checks</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><span class="header-section-number">6</span> Exploratory Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#geography-wise-churn" id="toc-geography-wise-churn" class="nav-link" data-scroll-target="#geography-wise-churn"><span class="header-section-number">6.1</span> Geography wise churn</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -439,6 +443,38 @@ Reasons for a churn to occur
 </div>
 </div>
 </div>
+</section>
+<section id="exploratory-data-analysis" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Exploratory Data Analysis</h1>
+<p>Before we create a prediction model, we need to understand how are our variables correlated to one another. This will be done through various visualisations as follows:</p>
+<section id="geography-wise-churn" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="geography-wise-churn"><span class="header-section-number">6.1</span> Geography wise churn</h2>
+<p>Let us try to understand if there are any geographical regions which have accounted for high churns.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-geo" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Bank_churn_files/figure-html/fig-geo-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Bank accounts for each geographical location</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Based on the illustration <a href="#fig-geo">Figure&nbsp;4</a>, we can observe that the percentage of churns are significantly higher in Germany as compared to France and Spain where the churn percentage appears to be similar.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The higher churn % for Germany could indicate issues pertaining to the economy of the country or factors such as loan interest rate in the country. It could also indicate that the banking services or customer services in Germany might be lacking as compared to the other countries which have resulted in the higher churn percentage. Diving deeper into the banking practices of Germany would provide a better understanding as to the reason for the high attrition of customers.</p>
+</div>
+</div>
+</section>
 </section>
 
 </main>
