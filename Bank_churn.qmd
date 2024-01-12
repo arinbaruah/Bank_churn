@@ -209,3 +209,29 @@ Based on the illustration @fig-geo, we can observe that the percentage of churns
 
 The higher churn % for Germany could indicate issues pertaining to the economy of the country or factors such as loan interest rate in the country. It could also indicate that the banking services or customer services in Germany might be lacking as compared to the other countries which have resulted in the higher churn percentage. Diving deeper into the banking practices of Germany would provide a better understanding as to the reason for the high attrition of customers.
 :::
+
+## Age wise bank churn
+
+
+```{r}
+#| label: fig-age-churn
+#| fig-cap: "Age wise churn data"
+df_bank$Exited <- case_match(df_bank$Exited,0~"Active",1~"Churn")
+pl3 <- ggplot(data = df_bank,aes(x = Age,fill = as.factor(Exited))) + geom_histogram(alpha=0.5,color = "black",
+                                                                                     position = "identity") + scale_fill_manual(values = c("blue","red")) +
+  labs(x = "Age of customer (years)",y = "Number of customers",fill = "Bank account status",caption = "Visual by Arindam Baruah") + theme_economist() + theme(panel.background = element_rect(fill = "cornsilk"))
+
+pl3
+```
+
+As we can observe through @fig-age-churn, the churns are associated majorly with customers between the ages of 25 and 60.
+
+:::{.callout-note}
+# Key takeaway
+
+The data indicates that after a couple of years since opening a new bank account, customers are observed to close their accounts which could be due to numerous reasons such as:
+
+1. Better customer services from other banks 
+2. Low credit score or due to financial bankruptcy of the customer
+3. High loan interests charged by the bank which may have led the customer to switch to another bank after fulfilling the loan.
+:::
