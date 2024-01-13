@@ -235,3 +235,23 @@ The data indicates that after a couple of years since opening a new bank account
 2. Low credit score or due to financial bankruptcy of the customer
 3. High loan interests charged by the bank which may have led the customer to switch to another bank after fulfilling the loan.
 :::
+
+# Credit score wise churn
+
+Let us now try to analyse if the credit scores could tell us anything about the likelihood of the bank account churns.
+
+```{r}
+#| label: fig-cred
+#| fig-cap: "Credit score distribution of churned accounts"
+pl4 <- ggplot(data = df_bank, aes(x = CreditScore,fill = Exited)) + geom_density(alpha =0.7) + theme_classic() + labs(x= "Credit score of customer",
+                                                                                                                      y = "Probability density",
+                                                                                                                      fill = "Bank account status") +
+  scale_fill_manual(values = c("blue","red"))
+pl4
+```
+
+:::{.callout-note}
+# Key takeaway
+
+Based on the credit score distribution of the churned and active accounts as illustrated in @fig-cred, we __cannot observe any discernible difference in the credit scores which could indicate the likeliness of a bank account churn__. This indicates that the credit scores of customers may not be a strong factor leading to them closing their bank accounts.
+:::

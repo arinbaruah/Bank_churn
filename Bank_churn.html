@@ -93,6 +93,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#geography-wise-churn" id="toc-geography-wise-churn" class="nav-link" data-scroll-target="#geography-wise-churn"><span class="header-section-number">6.1</span> Geography wise churn</a></li>
   <li><a href="#age-wise-bank-churn" id="toc-age-wise-bank-churn" class="nav-link" data-scroll-target="#age-wise-bank-churn"><span class="header-section-number">6.2</span> Age wise bank churn</a></li>
   </ul></li>
+  <li><a href="#credit-score-wise-churn" id="toc-credit-score-wise-churn" class="nav-link" data-scroll-target="#credit-score-wise-churn"><span class="header-section-number">7</span> Credit score wise churn</a></li>
   </ul>
 </nav>
 </div>
@@ -508,6 +509,33 @@ Key takeaway
 </div>
 </div>
 </section>
+</section>
+<section id="credit-score-wise-churn" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Credit score wise churn</h1>
+<p>Let us now try to analyse if the credit scores could tell us anything about the likelihood of the bank account churns.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-cred" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Bank_churn_files/figure-html/fig-cred-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Credit score distribution of churned accounts</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on the credit score distribution of the churned and active accounts as illustrated in <a href="#fig-cred">Figure&nbsp;6</a>, we <strong>cannot observe any discernible difference in the credit scores which could indicate the likeliness of a bank account churn</strong>. This indicates that the credit scores of customers may not be a strong factor leading to them closing their bank accounts.</p>
+</div>
+</div>
 </section>
 
 </main>
