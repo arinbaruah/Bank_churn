@@ -14,7 +14,7 @@ execute:
 
 ![Source: Medium](figure/fig1.png)
 
-# What is a bank churn and why does it occur ? 
+# What is a bank churn and why does it occur ? {#sec-intro}
 
 With the advent of digital banking, it has become extremely convenient for users to open a new bank account. As opposed to the age old tradition of submitting multiple documents and credit histories after visiting a bank, the process has been revamped by a great deal with an user needing less than 10 minutes to open an account in the comfort of their couches.
 
@@ -236,7 +236,7 @@ The data indicates that after a couple of years since opening a new bank account
 3. High loan interests charged by the bank which may have led the customer to switch to another bank after fulfilling the loan.
 :::
 
-# Credit score wise churn
+## Credit score wise churn
 
 Let us now try to analyse if the credit scores could tell us anything about the likelihood of the bank account churns.
 
@@ -245,7 +245,8 @@ Let us now try to analyse if the credit scores could tell us anything about the 
 #| fig-cap: "Credit score distribution of churned accounts"
 pl4 <- ggplot(data = df_bank, aes(x = CreditScore,fill = Exited)) + geom_density(alpha =0.7) + theme_classic() + labs(x= "Credit score of customer",
                                                                                                                       y = "Probability density",
-                                                                                                                      fill = "Bank account status") +
+                                                                                                                      fill = "Bank account status",
+                                                                                                                      caption = "Visual by Arindam Baruah") +
   scale_fill_manual(values = c("blue","red"))
 pl4
 ```
@@ -255,3 +256,74 @@ pl4
 
 Based on the credit score distribution of the churned and active accounts as illustrated in @fig-cred, we __cannot observe any discernible difference in the credit scores which could indicate the likeliness of a bank account churn__. This indicates that the credit scores of customers may not be a strong factor leading to them closing their bank accounts.
 :::
+
+## Transaction activity wise churn 
+
+Next, we can analyse if the churns are mostly from bank accounts which are inactive, possibly due to very low transactions.
+
+```{r}
+#| label: fig-transact
+#| fig-cap: "Transaction activity wise churn"
+
+df_active <- df_bank %>% group_by(IsActiveMember,Exited) %>% summarise(Total_churns = n())
+
+df_active <- df_active %>%
+  mutate(Percentage = Total_churns / sum(Total_churns) * 100)
+
+x_labels <- c("Inactive","Active")
+pl5 <- ggplot(data = df_active,aes(x = as.factor(IsActiveMember),y = Total_churns,
+                                fill = Exited)) + geom_col(position = "fill",color="black",alpha=0.8) + theme_classic() + labs(fill = "Bank account status",
+                                                                                                                     caption = "Visual by Arindam Baruah",
+                                                                                                                     title = "Bank account churn based on account activity",x = "Transactional acitvity",y = "Proportion of bank accounts") + theme(plot.title = element_text(hjust = 0.5)) +
+geom_text(
+    aes(label = paste0(round(Percentage,1),"%")),
+    position = position_fill(vjust = 0.5),  # Adjust the position as needed
+    color = "black"
+  ) + scale_fill_manual(values = c("blue","red")) + scale_x_discrete(labels = x_labels,breaks = c(0,1)) + coord_flip()
+
+pl5
+```
+
+:::{.callout-note}
+# Key takeaway
+
+Based on @fig-transact, we can observe that the percentage of the __bank churns for inactive accounts are more than twice that of the active accounts.__
+
+This indicates that the probability of a churn rises if the transaction activity of the bank account reduces. This could also be measure taken by the bank to reduce the burden of keeping the services activated for accounts which have shown little to no activity for an extended period of duraiton.
+
+:::
+
+## Balance wise churn
+
+Let us try to analyse if the account balance can indicate whether a churn might take place. 
+
+For this, we will flag any balance which is 0.
+
+```{r}
+#| label: fig-balance
+#| fig-cap: "Account balance wise churn"
+df_bank_balance <- df_bank %>% mutate(NilBalance = case_match(Balance, 0~ "Zero balance",
+                                                              .default = "Positive balance"))
+df_zero_churn <- df_bank_balance %>% group_by(NilBalance,Exited) %>% summarise(Total = n()) %>% mutate(Percentage = Total / sum(Total) * 100)
+
+pl6 <- ggplot(data = df_zero_churn,aes(x = NilBalance,y = Total,
+                                fill = Exited)) + geom_col(position = "fill",color="black",alpha=0.8) + theme_classic() + labs(fill = "Bank account status",
+                                                                                                                     caption = "Visual by Arindam Baruah",
+                                                                                                                     title = "Bank account churn based on account balance",x = "Account balance",y = "Proportion of bank accounts") + theme(plot.title = element_text(hjust = 0.5)) +
+geom_text(
+    aes(label = paste0(round(Percentage,1),"%")),
+    position = position_fill(vjust = 0.5),  # Adjust the position as needed
+    color = "black"
+  ) + scale_fill_manual(values = c("blue","red"))  + coord_flip()
+
+pl6
+```
+:::{.callout-note}
+# Key takeaway
+
+@fig-balance illustrates the percentage of bank accounts churned for accounts with positive balance and zero balance. Contrary to belief, the percentage of churns are actually higher for accounts with positive balance as compared to zero balance accounts. 
+
+This could be due to the fact that account holders with zero balances are generally inactive and may not proactively close their accounts but rather, is done so by the bank to reduce the maintenance cost of keeping zero balance accounts active. However, account holders with positive balance may proactively choose to close their accounts due to various reasons as stated in @sec-intro which may lead to the higher percentage of churned accounts.
+:::
+
+
