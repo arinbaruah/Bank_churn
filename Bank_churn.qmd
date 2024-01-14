@@ -117,7 +117,7 @@ Based on a brief research, the description for each variable in the dataset is a
 #| fig-cap: "Check for missing values in the dataset"
 gg_miss_var(df_bank)
 ```
-As we can observe from @fig-misvis, the dataset is clean and __does not have any missing values.__ While this is ideal, it is however not the only check that we must perform in the data.
+As we can observe from @fig-misvis, the dataset is clean and __does not have any missing values to be dealt with.__ While this is ideal, it is however not the only check that we must perform in the data.
 
 # Data sanity checks
 ::: panel-tabset
@@ -362,5 +362,17 @@ This could be due to the fact that account holders with zero balances are genera
 :::
 
 
+# Model creation
 
+Now that we have analysed the variables, visualised them and cleaned the data into a machine readable form, we will now be working on a predictive model to be able to accurately predict whether the bank account details of a customer can help indicate if a bank account churn might occur.
 
+Let us create our train and test datasets as follows:
+
+```{r echo=TRUE}
+set.seed(101)
+sample =  sample.split(df_bank_num$Exited,SplitRatio = 0.7)
+train = subset(df_bank_num,sample == T)
+test = subset(df_bank_num,sample == F)
+```
+
+Here, we have allocated 70% of the dataset as the training dataset which will be used to train our machine learning model while the remaining 30% of the dataset will be allocated as a test dataset which will allow us to understand the accuracy of our classification model.

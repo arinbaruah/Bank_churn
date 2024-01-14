@@ -97,6 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#transaction-activity-wise-churn" id="toc-transaction-activity-wise-churn" class="nav-link" data-scroll-target="#transaction-activity-wise-churn"><span class="header-section-number">6.5</span> Transaction activity wise churn</a></li>
   <li><a href="#balance-wise-churn" id="toc-balance-wise-churn" class="nav-link" data-scroll-target="#balance-wise-churn"><span class="header-section-number">6.6</span> Balance wise churn</a></li>
   </ul></li>
+  <li><a href="#model-creation" id="toc-model-creation" class="nav-link" data-scroll-target="#model-creation"><span class="header-section-number">7</span> Model creation</a></li>
   </ul>
 </nav>
 </div>
@@ -364,7 +365,7 @@ Reasons for a churn to occur
 </div>
 </div>
 </div>
-<p>As we can observe from <a href="#fig-misvis">Figure&nbsp;1</a>, the dataset is clean and <strong>does not have any missing values.</strong> While this is ideal, it is however not the only check that we must perform in the data.</p>
+<p>As we can observe from <a href="#fig-misvis">Figure&nbsp;1</a>, the dataset is clean and <strong>does not have any missing values to be dealt with.</strong> While this is ideal, it is however not the only check that we must perform in the data.</p>
 </section>
 <section id="data-sanity-checks" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Data sanity checks</h1>
@@ -622,6 +623,18 @@ Key takeaway
 </div>
 </div>
 </section>
+</section>
+<section id="model-creation" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Model creation</h1>
+<p>Now that we have analysed the variables, visualised them and cleaned the data into a machine readable form, we will now be working on a predictive model to be able to accurately predict whether the bank account details of a customer can help indicate if a bank account churn might occur.</p>
+<p>Let us create our train and test datasets as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">=</span>  <span class="fu">sample.split</span>(df_bank_num<span class="sc">$</span>Exited,<span class="at">SplitRatio =</span> <span class="fl">0.7</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>train <span class="ot">=</span> <span class="fu">subset</span>(df_bank_num,sample <span class="sc">==</span> T)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> <span class="fu">subset</span>(df_bank_num,sample <span class="sc">==</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here, we have allocated 70% of the dataset as the training dataset which will be used to train our machine learning model while the remaining 30% of the dataset will be allocated as a test dataset which will allow us to understand the accuracy of our classification model.</p>
 </section>
 
 </main>
