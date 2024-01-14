@@ -172,6 +172,41 @@ Based on @fig-age, we can observe that the data indeed suggests that the custome
 Before we create a prediction model, we need to understand how are our variables correlated to one another. This will be done through various visualisations as follows:
 
 
+## Correlation plot
+
+
+```{r corrplot}
+#| label: fig-corrplot
+#| fig-cap: "Correlation plot"
+
+
+nom_features <- c("id","CustomerId","Surname")
+df_bank_num <- df_bank %>% select(-nom_features)
+
+df_bank_num$Gender <- as.factor(df_bank_num$Gender)
+df_bank_num$Geography <- as.factor(df_bank_num$Geography)
+dt_bank_num <- data.table(df_bank_num)
+df_bank_num <- as.data.frame(one_hot(dt_bank_num,cols = c("Gender","Geography")))
+
+
+corrplot(cor(df_bank_num),        # Correlation matrix
+         method = "number", # Correlation plot method
+         type = "full",    # Correlation plot style (also "upper" and "lower")
+         diag = TRUE,      # If TRUE (default), adds the diagonal
+         tl.col = "black", # Labels color
+         bg = "white",     # Background color
+         title = "Correlation plot",       # Main title
+         col = NULL,
+         number.cex = 0.5,
+         tl.cex = .5,
+         )
+
+```
+:::{.callout-note}
+# Key takeaway
+Based on our understanding of the variables as illustrated by the correlation plot in @fig-corrplot, we can infer that there is __no single variable which is highly correlated__ to the churn indicator. __We can also observe that none of the features are highly correlated to one another. This indicates that there is no multicollinearity in the choice of our features.__
+:::
+
 ## Geography wise churn
 
 Let us try to understand if there are any geographical regions which have accounted for high churns.
@@ -197,7 +232,7 @@ geom_text(
     aes(label = paste0(round(Percentage,1),"%")),
     position = position_fill(vjust = 0.5),  # Adjust the position as needed
     color = "black"
-  )
+  ) + scale_fill_manual(values= c("blue","red"))
 
 pl2
 ```
@@ -325,5 +360,7 @@ pl6
 
 This could be due to the fact that account holders with zero balances are generally inactive and may not proactively close their accounts but rather, is done so by the bank to reduce the maintenance cost of keeping zero balance accounts active. However, account holders with positive balance may proactively choose to close their accounts due to various reasons as stated in @sec-intro which may lead to the higher percentage of churned accounts.
 :::
+
+
 
 

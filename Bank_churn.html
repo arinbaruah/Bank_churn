@@ -90,11 +90,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-sanity-checks" id="toc-data-sanity-checks" class="nav-link" data-scroll-target="#data-sanity-checks"><span class="header-section-number">5</span> Data sanity checks</a></li>
   <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><span class="header-section-number">6</span> Exploratory Data Analysis</a>
   <ul class="collapse">
-  <li><a href="#geography-wise-churn" id="toc-geography-wise-churn" class="nav-link" data-scroll-target="#geography-wise-churn"><span class="header-section-number">6.1</span> Geography wise churn</a></li>
-  <li><a href="#age-wise-bank-churn" id="toc-age-wise-bank-churn" class="nav-link" data-scroll-target="#age-wise-bank-churn"><span class="header-section-number">6.2</span> Age wise bank churn</a></li>
-  <li><a href="#credit-score-wise-churn" id="toc-credit-score-wise-churn" class="nav-link" data-scroll-target="#credit-score-wise-churn"><span class="header-section-number">6.3</span> Credit score wise churn</a></li>
-  <li><a href="#transaction-activity-wise-churn" id="toc-transaction-activity-wise-churn" class="nav-link" data-scroll-target="#transaction-activity-wise-churn"><span class="header-section-number">6.4</span> Transaction activity wise churn</a></li>
-  <li><a href="#balance-wise-churn" id="toc-balance-wise-churn" class="nav-link" data-scroll-target="#balance-wise-churn"><span class="header-section-number">6.5</span> Balance wise churn</a></li>
+  <li><a href="#correlation-plot" id="toc-correlation-plot" class="nav-link" data-scroll-target="#correlation-plot"><span class="header-section-number">6.1</span> Correlation plot</a></li>
+  <li><a href="#geography-wise-churn" id="toc-geography-wise-churn" class="nav-link" data-scroll-target="#geography-wise-churn"><span class="header-section-number">6.2</span> Geography wise churn</a></li>
+  <li><a href="#age-wise-bank-churn" id="toc-age-wise-bank-churn" class="nav-link" data-scroll-target="#age-wise-bank-churn"><span class="header-section-number">6.3</span> Age wise bank churn</a></li>
+  <li><a href="#credit-score-wise-churn" id="toc-credit-score-wise-churn" class="nav-link" data-scroll-target="#credit-score-wise-churn"><span class="header-section-number">6.4</span> Credit score wise churn</a></li>
+  <li><a href="#transaction-activity-wise-churn" id="toc-transaction-activity-wise-churn" class="nav-link" data-scroll-target="#transaction-activity-wise-churn"><span class="header-section-number">6.5</span> Transaction activity wise churn</a></li>
+  <li><a href="#balance-wise-churn" id="toc-balance-wise-churn" class="nav-link" data-scroll-target="#balance-wise-churn"><span class="header-section-number">6.6</span> Balance wise churn</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -451,20 +452,46 @@ Reasons for a churn to occur
 <section id="exploratory-data-analysis" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Exploratory Data Analysis</h1>
 <p>Before we create a prediction model, we need to understand how are our variables correlated to one another. This will be done through various visualisations as follows:</p>
-<section id="geography-wise-churn" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="geography-wise-churn"><span class="header-section-number">6.1</span> Geography wise churn</h2>
+<section id="correlation-plot" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="correlation-plot"><span class="header-section-number">6.1</span> Correlation plot</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-corrplot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Bank_churn_files/figure-html/fig-corrplot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Correlation plot</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on our understanding of the variables as illustrated by the correlation plot in <a href="#fig-corrplot">Figure&nbsp;4</a>, we can infer that there is <strong>no single variable which is highly correlated</strong> to the churn indicator. <strong>We can also observe that none of the features are highly correlated to one another. This indicates that there is no multicollinearity in the choice of our features.</strong></p>
+</div>
+</div>
+</section>
+<section id="geography-wise-churn" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="geography-wise-churn"><span class="header-section-number">6.2</span> Geography wise churn</h2>
 <p>Let us try to understand if there are any geographical regions which have accounted for high churns.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-geo" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Bank_churn_files/figure-html/fig-geo-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: Bank accounts for each geographical location</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;5: Bank accounts for each geographical location</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Based on the illustration <a href="#fig-geo">Figure&nbsp;4</a>, we can observe that the percentage of churns are significantly higher in Germany as compared to France and Spain where the churn percentage appears to be similar.</p>
+<p>Based on the illustration <a href="#fig-geo">Figure&nbsp;5</a>, we can observe that the percentage of churns are significantly higher in Germany as compared to France and Spain where the churn percentage appears to be similar.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -479,19 +506,19 @@ Key takeaway
 </div>
 </div>
 </section>
-<section id="age-wise-bank-churn" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="age-wise-bank-churn"><span class="header-section-number">6.2</span> Age wise bank churn</h2>
+<section id="age-wise-bank-churn" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="age-wise-bank-churn"><span class="header-section-number">6.3</span> Age wise bank churn</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-age-churn" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Bank_churn_files/figure-html/fig-age-churn-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Age wise churn data</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6: Age wise churn data</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>As we can observe through <a href="#fig-age-churn">Figure&nbsp;5</a>, the churns are associated majorly with customers between the ages of 25 and 60.</p>
+<p>As we can observe through <a href="#fig-age-churn">Figure&nbsp;6</a>, the churns are associated majorly with customers between the ages of 25 and 60.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -511,15 +538,15 @@ Key takeaway
 </div>
 </div>
 </section>
-<section id="credit-score-wise-churn" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="credit-score-wise-churn"><span class="header-section-number">6.3</span> Credit score wise churn</h2>
+<section id="credit-score-wise-churn" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="credit-score-wise-churn"><span class="header-section-number">6.4</span> Credit score wise churn</h2>
 <p>Let us now try to analyse if the credit scores could tell us anything about the likelihood of the bank account churns.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-cred" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Bank_churn_files/figure-html/fig-cred-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;6: Credit score distribution of churned accounts</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7: Credit score distribution of churned accounts</figcaption>
 </figure>
 </div>
 </div>
@@ -534,19 +561,19 @@ Key takeaway
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on the credit score distribution of the churned and active accounts as illustrated in <a href="#fig-cred">Figure&nbsp;6</a>, we <strong>cannot observe any discernible difference in the credit scores which could indicate the likeliness of a bank account churn</strong>. This indicates that the credit scores of customers may not be a strong factor leading to them closing their bank accounts.</p>
+<p>Based on the credit score distribution of the churned and active accounts as illustrated in <a href="#fig-cred">Figure&nbsp;7</a>, we <strong>cannot observe any discernible difference in the credit scores which could indicate the likeliness of a bank account churn</strong>. This indicates that the credit scores of customers may not be a strong factor leading to them closing their bank accounts.</p>
 </div>
 </div>
 </section>
-<section id="transaction-activity-wise-churn" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="transaction-activity-wise-churn"><span class="header-section-number">6.4</span> Transaction activity wise churn</h2>
+<section id="transaction-activity-wise-churn" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="transaction-activity-wise-churn"><span class="header-section-number">6.5</span> Transaction activity wise churn</h2>
 <p>Next, we can analyse if the churns are mostly from bank accounts which are inactive, possibly due to very low transactions.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-transact" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Bank_churn_files/figure-html/fig-transact-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;7: Transaction activity wise churn</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;8: Transaction activity wise churn</figcaption>
 </figure>
 </div>
 </div>
@@ -561,13 +588,13 @@ Key takeaway
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Based on <a href="#fig-transact">Figure&nbsp;7</a>, we can observe that the percentage of the <strong>bank churns for inactive accounts are more than twice that of the active accounts.</strong></p>
+<p>Based on <a href="#fig-transact">Figure&nbsp;8</a>, we can observe that the percentage of the <strong>bank churns for inactive accounts are more than twice that of the active accounts.</strong></p>
 <p>This indicates that the probability of a churn rises if the transaction activity of the bank account reduces. This could also be measure taken by the bank to reduce the burden of keeping the services activated for accounts which have shown little to no activity for an extended period of duraiton.</p>
 </div>
 </div>
 </section>
-<section id="balance-wise-churn" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="balance-wise-churn"><span class="header-section-number">6.5</span> Balance wise churn</h2>
+<section id="balance-wise-churn" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="balance-wise-churn"><span class="header-section-number">6.6</span> Balance wise churn</h2>
 <p>Let us try to analyse if the account balance can indicate whether a churn might take place.</p>
 <p>For this, we will flag any balance which is 0.</p>
 <div class="cell">
@@ -575,7 +602,7 @@ Key takeaway
 <div id="fig-balance" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="Bank_churn_files/figure-html/fig-balance-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;8: Account balance wise churn</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;9: Account balance wise churn</figcaption>
 </figure>
 </div>
 </div>
@@ -590,7 +617,7 @@ Key takeaway
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="#fig-balance">Figure&nbsp;8</a> illustrates the percentage of bank accounts churned for accounts with positive balance and zero balance. Contrary to belief, the percentage of churns are actually higher for accounts with positive balance as compared to zero balance accounts.</p>
+<p><a href="#fig-balance">Figure&nbsp;9</a> illustrates the percentage of bank accounts churned for accounts with positive balance and zero balance. Contrary to belief, the percentage of churns are actually higher for accounts with positive balance as compared to zero balance accounts.</p>
 <p>This could be due to the fact that account holders with zero balances are generally inactive and may not proactively close their accounts but rather, is done so by the bank to reduce the maintenance cost of keeping zero balance accounts active. However, account holders with positive balance may proactively choose to close their accounts due to various reasons as stated in <a href="#sec-intro">Section&nbsp;1</a> which may lead to the higher percentage of churned accounts.</p>
 </div>
 </div>
