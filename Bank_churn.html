@@ -627,7 +627,7 @@ Key takeaway
 <section id="model-creation" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Model creation</h1>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Logistic Regression</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">XGboost classifier</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">Light GBM</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Logistic Regression</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">XGboost classifier</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">Light GBM</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-4" role="tab" aria-controls="tabset-3-4" aria-selected="false" href="">Catboost classifier</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <p>Here, we will fit the logistic regression model to the train data as follows.</p>
@@ -691,6 +691,30 @@ Key takeaway
 </div>
 </div>
 <p>Based on <a href="#fig-lgbconf">Figure&nbsp;13</a>, we can observe that the LGB classifier has actually classified poorly with multiple negatives observed in its classification. We can disregard this model for our purpose of classification.</p>
+</div>
+<div id="tabset-3-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-4-tab">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-catimp" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Bank_churn_files/figure-html/fig-catimp-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;14: Importance of each variable based on the Catboost classification algorithm</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-catconf" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Bank_churn_files/figure-html/fig-catconf-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;15: Confusion matrix for Catboost classification model</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Upon utilising the Catboost classifier, we can observe from <a href="#fig-lgbconf">Figure&nbsp;13</a> that the classifier <strong>has a marginally better accuracy when compared to the logistic regression, XGboost and Light GBM.</strong></p>
+<p>Additionally, <a href="#fig-catimp">Figure&nbsp;14</a> indicates the variables which have the highest importance in predicting the bank account churns. We can observe that the variables, “Number of products” followed by “Age” and “Activity” are the most critical to be able to predict tge churned accounts.</p>
 </div>
 </div>
 </div>
