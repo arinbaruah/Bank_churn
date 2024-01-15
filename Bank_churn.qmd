@@ -586,7 +586,7 @@ cm_cat <- confusionMatrix(factor(pred_cat),factor(test$Exited))
 draw_confusion_matrix(cm_cat)
 ```
 
-Upon utilising the Catboost classifier, we can observe from @fig-lgbconf that the classifier __has a marginally better accuracy when compared to the logistic regression, XGboost and Light GBM.__
+Upon utilising the Catboost classifier, we can observe from @fig-catconf that the classifier __has a marginally better accuracy when compared to the logistic regression, XGboost and Light GBM.__
 
 Additionally, @fig-catimp indicates the variables which have the highest importance in predicting the bank account churns. We can observe that the variables, "Number of products" followed by "Age" and "Activity" are the most critical to be able to predict tge churned accounts. 
 
