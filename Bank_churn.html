@@ -626,15 +626,60 @@ Key takeaway
 </section>
 <section id="model-creation" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Model creation</h1>
-<p>Now that we have analysed the variables, visualised them and cleaned the data into a machine readable form, we will now be working on a predictive model to be able to accurately predict whether the bank account details of a customer can help indicate if a bank account churn might occur.</p>
-<p>Let us create our train and test datasets as follows:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Logistic Regression</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">XGboost classifier</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Here, we will fit the logistic regression model to the train data as follows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">=</span>  <span class="fu">sample.split</span>(df_bank_num<span class="sc">$</span>Exited,<span class="at">SplitRatio =</span> <span class="fl">0.7</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>train <span class="ot">=</span> <span class="fu">subset</span>(df_bank_num,sample <span class="sc">==</span> T)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> <span class="fu">subset</span>(df_bank_num,sample <span class="sc">==</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>model_logit <span class="ot">&lt;-</span> <span class="fu">glm</span>(Exited<span class="sc">~</span>.,<span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span><span class="st">'logit'</span>),<span class="at">data=</span>train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Here, we have allocated 70% of the dataset as the training dataset which will be used to train our machine learning model while the remaining 30% of the dataset will be allocated as a test dataset which will allow us to understand the accuracy of our classification model.</p>
+<p>Let us study the performance of the logistic regression model through the Receiver Operating Curve (ROC) metric.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-roclog" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Bank_churn_files/figure-html/fig-roclog-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;10: ROC-AUC metric</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Based on the receiver operating curve as illustrated by <a href="#fig-roclog">Figure&nbsp;10</a>, we can observe that while a sizeable are of the graph is covered by the curve, it can however by improved by possibly a better classification algorithm.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-conflog" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Bank_churn_files/figure-html/fig-conflog-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;11: Confusion matrix for Logistic Regression classification model</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-conflog">Figure&nbsp;11</a> depicts a more intuitive way to understand the performance of the Logistic Regression. The model was able to predict the churned accounts with an <strong>accuracy of 83.4%</strong>.</p>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>Let us try to use an extra gradient boosted ensemble method commonly termed as the XGboost classifier.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] train-logloss:0.430351 
+[2] train-logloss:0.381727 </code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-confxgb" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Bank_churn_files/figure-html/fig-confxgb-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;12: Confusion matrix for XGBoost classification model</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We observe a marginally <strong>better classification accuracy as compared to the logistic regression model for the XGboosted classifier as depicted by <a href="#fig-confxgb">Figure&nbsp;12</a> with an accuracy of 85.1%.</strong></p>
+</div>
+</div>
+</div>
 </section>
 
 </main>
