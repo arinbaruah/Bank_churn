@@ -494,4 +494,54 @@ draw_confusion_matrix(cm_xgb)
 ```
 
 We observe a marginally __better classification accuracy as compared to the logistic regression model for the XGboosted classifier as depicted by @fig-confxgb with an accuracy of 85.1%.__
+
+
+
+## Light GBM
+
+Let us utilise the LGBM algorithm and train it on the given dataset.
+
+```{r include=FALSE,echo=TRUE}
+
+params = list(max_bin = 8,
+               learning_rate = 0.001,
+               objective = "binary",
+               metric = 'binary_logloss')
+
+trainm = sparse.model.matrix(Exited~., data = train )
+train_label = train[,"Exited"]
+
+train_matrix = lgb.Dataset(data = as.matrix(trainm), label = train_label)
+
+model_lgb = lightgbm(params = params, train_matrix, nrounds = 2000)
+```
+
+
+
+
+```{r fig.align='center'}
+#| label: fig-lgbconf
+#| fig-cap: "Confusion matrix for Light GBM classification model"
+pred_lgb = predict(model_lgb, as.matrix(test))
+pred_lgb <- if_else(pred_lgb > 0.6,1,0)
+cm_lgb <- confusionMatrix(factor(pred_lgb),factor(test$Exited))
+draw_confusion_matrix(cm_lgb)
+```
+Based on @fig-lgbconf, we can observe that the LGB classifier has actually classified poorly with multiple negatives observed in its classification. We can disregard this model for our purpose of classification.
+
 :::
+
+```{r eval=FALSE}
+
+preds <- predict(xgb_model,df_test,type='response')
+fitted.results <- as.data.frame(preds)
+fitted.results <- fitted.results %>% rename("Exited" = "preds" )
+fitted.results$id <- test_id
+fitted.results <- fitted.results %>% select(c("id","Exited"))
+
+write_csv(fitted.results,"submission.csv")
+
+
+```
+
+
