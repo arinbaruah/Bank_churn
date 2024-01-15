@@ -592,15 +592,28 @@ Additionally, @fig-catimp indicates the variables which have the highest importa
 
 :::
 
-```{r eval=FALSE}
+```{r }
 
-preds <- predict(xgb_model,df_test,type='response')
+df_test <- read_csv("data/test.csv")
+df_test_id <- df_test$id
+df_test <- df_test %>% select(-nom_features)
+
+df_test$Gender <- as.factor(df_test$Gender)
+df_test$Geography <- as.factor(df_test$Geography)
+dt_test <- data.table(df_test)
+df_test <- as.data.frame(one_hot(dt_test,cols = c("Gender","Geography")))
+
+```
+```{r}
+preds <- predict(xgb_model,as.matrix(df_test))
 fitted.results <- as.data.frame(preds)
+
 fitted.results <- fitted.results %>% rename("Exited" = "preds" )
-fitted.results$id <- test_id
+fitted.results$id <- df_test_id
 fitted.results <- fitted.results %>% select(c("id","Exited"))
 
 write_csv(fitted.results,"submission.csv")
+
 
 
 ```
